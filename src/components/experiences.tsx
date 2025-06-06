@@ -1,5 +1,4 @@
 import { motion, type Variants } from "framer-motion";
-import { div, section } from "framer-motion/client";
 
 const experienceData = [
   {

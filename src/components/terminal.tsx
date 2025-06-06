@@ -14,7 +14,7 @@ const trimInput = (input: string) => {
 
 const Terminal = () => {
   const [input, setInput] = useState("");
-  const [history, setHistory] = useState<string[]>([]);
+  const [, setHistory] = useState<string[]>([]);
   const [output, setOutput] = useState("");
 
   const commandToComponent: Record<string, React.ReactNode> = {

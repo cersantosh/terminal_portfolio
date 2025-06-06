@@ -43,9 +43,7 @@ const About = () => {
 
         <PhotoAndName
           name={myInfo.name}
-          step={step}
           incrementStep={incrementStep}
-          commandSpeed={commandSpeed}
           textSpeed={textSpeed}
         />
         {step >= 1 && (
@@ -95,42 +93,38 @@ function TerminalBox({ children }: { children: React.ReactNode }) {
 
 function PhotoAndName({
   name,
-  step,
   incrementStep,
-  commandSpeed,
   textSpeed,
 }: {
   name: string;
-  step: number;
   incrementStep: (count: number, reset: number) => void;
-  commandSpeed: number;
   textSpeed: number;
 }) {
   return (
-      <section className="w-full flex justify-center items-center flex-col">
-        <img
-          src={profilePhoto}
-          alt="profile photo"
-          className="w-40 h-40 rounded-full border-4 border-green-500 shadow-lg transition-all duration-300 mb-4 sm:hover:w-80 sm:hover:h-80"
+    <section className="w-full flex justify-center items-center flex-col">
+      <img
+        src={profilePhoto}
+        alt="profile photo"
+        className="w-40 h-40 rounded-full border-4 border-green-500 shadow-lg transition-all duration-300 mb-4 sm:hover:w-80 sm:hover:h-80"
+      />
+      <p className="text-lg">
+        <Typewriter
+          component="span"
+          onInit={(typewriter) => {
+            typewriter
+              .changeDelay(textSpeed)
+              .typeString(name)
+              .callFunction(() => {
+                incrementStep(0, 1);
+              })
+              .start();
+          }}
+          options={{
+            cursor: "",
+          }}
         />
-        <p className="text-lg">
-          <Typewriter
-            component="span"
-            onInit={(typewriter) => {
-              typewriter
-                .changeDelay(textSpeed)
-                .typeString(name)
-                .callFunction(() => {
-                  incrementStep(0, 1);
-                })
-                .start();
-            }}
-            options={{
-              cursor: "",
-            }}
-          />
-        </p>
-      </section>
+      </p>
+    </section>
   );
 }
 
@@ -399,7 +393,9 @@ function Description({
               onInit={(typewriter) => {
                 typewriter
                   .changeDelay(textSpeed)
-                  .typeString("and developing high-performance mobile apps with ")
+                  .typeString(
+                    "and developing high-performance mobile apps with "
+                  )
                   .callFunction(() => {
                     incrementStep(0.1);
                   })
@@ -473,10 +469,12 @@ function Description({
               onInit={(typewriter) => {
                 typewriter
                   .changeDelay(textSpeed)
-                  .typeString("and cloud technologies, aiming to contribute to the future of tech.")
+                  .typeString(
+                    "and cloud technologies, aiming to contribute to the future of tech."
+                  )
                   .callFunction(() => {
-                      incrementStep(0.1);
-                    })
+                    incrementStep(0.1);
+                  })
                   .start();
               }}
               options={{
